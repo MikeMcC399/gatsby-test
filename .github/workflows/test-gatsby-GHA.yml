@@ -13,24 +13,25 @@ jobs:
       with:
         start: npm start
 
-  wait-on-node:
-    runs-on: ubuntu-22.04
-    strategy:
-      fail-fast: false
-      matrix:
-        node: [16, 18]
-    steps:
-    - name: checkout
-      uses: actions/checkout@v3
-    - name: install Node.js ${{ matrix.node }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node }}
-    - name: Test
-      uses: cypress-io/github-action@v5
-      with:
-        wait-on: http://localhost:8000
-        start: npm start
+# gatsby 5.7 requires Node.js ">=18.0.0"
+  # wait-on-node:
+  #   runs-on: ubuntu-22.04
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       node: [16, 18]
+  #   steps:
+  #   - name: checkout
+  #     uses: actions/checkout@v3
+  #   - name: install Node.js ${{ matrix.node }}
+  #     uses: actions/setup-node@v3
+  #     with:
+  #       node-version: ${{ matrix.node }}
+  #   - name: Test
+  #     uses: cypress-io/github-action@v5
+  #     with:
+  #       wait-on: http://localhost:8000
+  #       start: npm start
 
   wait-on-os:
     strategy:
@@ -38,6 +39,7 @@ jobs:
       matrix:
         OS: [ubuntu-22.04, windows-2022, macos-12]
     name: wait-on ${{ matrix.OS }}
+    timeout-minutes: 5
     runs-on: ${{ matrix.OS }}
     steps:
     - name: checkout
@@ -54,6 +56,7 @@ jobs:
       matrix:
         OS: [ubuntu-22.04, windows-2022, macos-12]
     name: wait-on IPv4 ${{ matrix.OS }}
+    timeout-minutes: 5
     runs-on: ${{ matrix.OS }}
     steps:
     - name: checkout
