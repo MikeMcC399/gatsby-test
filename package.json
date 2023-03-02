@@ -12,7 +12,9 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "cy:run": "cypress run",
+    "curl": "./scripts/curl.sh"
   },
   "dependencies": {
     "cypress": "^12.7.0",
